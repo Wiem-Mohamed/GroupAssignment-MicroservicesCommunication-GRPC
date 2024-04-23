@@ -1,0 +1,28 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package demo.interfaces.grpc;
+
+message Group {
+    int64 groupID = 1;
+    string groupParent = 2;
+    string groupName = 3;
+    int64 groupNumberMembers = 4;
+}
+message GroupsRequest{}
+message GroupsResponse {
+    repeated Group Groups=1;
+}
+// The Group Service definition.
+service GroupService {
+    //  unary RPCs
+    rpc getGroup (Group) returns (Group) {
+    }
+    //  bidirectional streaming RPCs
+    rpc getAllGroupsByIDList (stream Group) returns (stream Group) {
+    }
+
+    //   client streaming RPCs
+    rpc getLargestGroup (stream Group) returns (Group) {
+    }
+
+}
